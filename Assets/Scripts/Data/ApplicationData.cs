@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ApplicationData
 {
@@ -20,15 +21,12 @@ public class ApplicationData
         }
     }
 
-    //settings
+    // Settings
     public float Volume = 1f;
     public bool IsMute = false;
 
-    public bool IsFirstGame = true;
-
-    //resources
+    // Resources
     private List<Item> _weapons = new List<Item>();
-
     private List<EconomicResource> _resources = new List<EconomicResource>();
     private string _currentSelectedWeapon = "StartKnife";
     private List<string> _unlockedWeapons = new List<string> { "StartKnife" };
@@ -38,44 +36,35 @@ public class ApplicationData
 
     public void InitResources(List<EconomicResource> resources)
     {
-        for (int i = 0; i < resources.Count; i++)
-        {
-            _resources.Add(resources[i]);
-        }
+        _resources = new List<EconomicResource>(resources);
     }
 
     public void AddResourceTickets(int amount)
     {
-        if (_resources != null)
+        if (_resources != null && _resources.Count > RESOURCE_TICKET_ID)
         {
-            if (_resources[RESOURCE_TICKET_ID] != null)
-            {
-                _resources[RESOURCE_TICKET_ID].Count += amount;
-                OnResourcesChanged?.Invoke(_resources[RESOURCE_CRYSTAL_ID].Count, _resources[RESOURCE_TICKET_ID].Count);
-            }
+            _resources[RESOURCE_TICKET_ID].Count += amount;
+            OnResourcesChanged?.Invoke(_resources[RESOURCE_CRYSTAL_ID].Count, _resources[RESOURCE_TICKET_ID].Count);
         }
     }
 
     public void AddResourceCrystals(int amount)
     {
-        if (_resources != null)
+        if (_resources != null && _resources.Count > RESOURCE_CRYSTAL_ID)
         {
-            if (_resources[RESOURCE_CRYSTAL_ID] != null)
-            {
-                _resources[RESOURCE_CRYSTAL_ID].Count += amount;
-                OnResourcesChanged?.Invoke(_resources[RESOURCE_CRYSTAL_ID].Count, _resources[RESOURCE_TICKET_ID].Count);
-            }
+            _resources[RESOURCE_CRYSTAL_ID].Count += amount;
+            OnResourcesChanged?.Invoke(_resources[RESOURCE_CRYSTAL_ID].Count, _resources[RESOURCE_TICKET_ID].Count);
         }
     }
 
     public int GetCrystals()
     {
-        return _resources[RESOURCE_CRYSTAL_ID].Count;
+        return _resources.Count > RESOURCE_CRYSTAL_ID ? _resources[RESOURCE_CRYSTAL_ID].Count : 0;
     }
 
     public int GetTickets()
     {
-        return _resources[RESOURCE_TICKET_ID].Count;
+        return _resources.Count > RESOURCE_TICKET_ID ? _resources[RESOURCE_TICKET_ID].Count : 0;
     }
 
     public void SetWeapon(string name)
@@ -84,6 +73,7 @@ public class ApplicationData
         {
             _currentSelectedWeapon = name;
             OnSelectWeapon?.Invoke(_currentSelectedWeapon);
+            SaveData();
         }
     }
 
@@ -99,19 +89,13 @@ public class ApplicationData
             _unlockedWeapons.Add(name);
             _currentSelectedWeapon = name;
             OnSelectWeapon?.Invoke(name);
+            SaveData();
         }
     }
 
     public bool IsWeaponUnlocked(string name)
     {
-        if (_unlockedWeapons.Contains(name))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return _unlockedWeapons.Contains(name);
     }
 
     public void SetWeapons(List<Item> weapons)
@@ -122,6 +106,35 @@ public class ApplicationData
     public List<Item> GetWeapons()
     {
         return _weapons;
+    }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt("Crystals", _resources[RESOURCE_CRYSTAL_ID].Count);
+        PlayerPrefs.SetInt("Tickets", _resources[RESOURCE_TICKET_ID].Count);
+        PlayerPrefs.SetString("CurrentSelectedWeapon", _currentSelectedWeapon);
+        PlayerPrefs.SetString("UnlockedWeapons", string.Join(",", _unlockedWeapons));
+        PlayerPrefs.Save();
+    }
+
+    public void LoadData()
+    {
+        if (PlayerPrefs.HasKey("CurrentSelectedWeapon"))
+        {
+            _currentSelectedWeapon = PlayerPrefs.GetString("CurrentSelectedWeapon");
+        }
+        if (PlayerPrefs.HasKey("UnlockedWeapons"))
+        {
+            _unlockedWeapons = new List<string>(PlayerPrefs.GetString("UnlockedWeapons").Split(','));
+        }
+        if (PlayerPrefs.HasKey("Crystals"))
+        {
+            _resources[RESOURCE_CRYSTAL_ID].Count = PlayerPrefs.GetInt("Crystals");
+        }
+        if (PlayerPrefs.HasKey("Tiskets"))
+        {
+            _resources[RESOURCE_TICKET_ID].Count = PlayerPrefs.GetInt("Tickets");
+        }
     }
 }
 

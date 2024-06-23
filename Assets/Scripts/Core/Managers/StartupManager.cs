@@ -8,13 +8,18 @@ public class StartupManager : MonoBehaviour
 
     private void Start()
     {
-        if (ApplicationData.Instance.IsFirstGame)
-        {
-            ApplicationData.Instance.InitResources(_resources);
-            ApplicationData.Instance.SetWeapons(_weapons);
-        }
+        var appData = ApplicationData.Instance;
+        appData.InitResources(_resources);
+        appData.SetWeapons(_weapons);
+
+        appData.LoadData();    
 
         DontDestroyOnLoad(gameObject);
-        SceneLoader.Instance.LoadScene(SceneLoader.Scene.MainScene);
+        SceneLoader.Instance?.LoadScene(SceneLoader.Scene.MainScene);
+    }
+
+    private void OnApplicationQuit()
+    {
+        ApplicationData.Instance.SaveData();
     }
 }

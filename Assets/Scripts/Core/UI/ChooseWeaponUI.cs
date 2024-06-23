@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChooseWaponUI : MonoBehaviour
+public class ChooseWeaponUI : MonoBehaviour
 {
     [SerializeField] Image _curWeaponImage;
 
@@ -29,9 +29,18 @@ public class ChooseWaponUI : MonoBehaviour
         _appData.OnSelectWeapon += _appData_OnSelectWeapon;
         _itemIndex = _weaponItems.Count - 1;
 
-        _checkButton.onClick.AddListener(() => { CheckWeapon(); });
-        _leftButton.onClick.AddListener(() => { MoveLeft(); });
-        _rightButton.onClick.AddListener(() => { MoveRight(); });
+        if (_checkButton != null)
+        {
+            _checkButton.onClick.AddListener(() => { CheckWeapon(); });
+        }
+        if (_leftButton != null)
+        {
+            _leftButton.onClick.AddListener(() => { MoveLeft(); });
+        }
+        if (_rightButton != null)
+        {
+            _rightButton.onClick.AddListener(() => { MoveRight(); });
+        }
 
         _appData_OnSelectWeapon(_appData.GetWeapon());
     }
@@ -48,7 +57,7 @@ public class ChooseWaponUI : MonoBehaviour
 
     private void CheckWeapon()
     {
-        AudioManager.Instance.PlayOneShotSound(_aplayClip);
+        AudioManager.Instance?.PlayOneShotSound(_aplayClip);
 
         if (_appData.IsWeaponUnlocked(_curWeapon.Name))
         {
@@ -75,7 +84,7 @@ public class ChooseWaponUI : MonoBehaviour
         }
         else
         {
-            _popupScreen.ShowMessage("NOT ENOUGH TICKETS!");
+            _popupScreen?.ShowMessage("NOT ENOUGH TICKETS!");
         }
 
         UpdateGraphics();
@@ -83,7 +92,7 @@ public class ChooseWaponUI : MonoBehaviour
 
     private void MoveLeft()
     {
-        AudioManager.Instance.PlayOneShotSound(_aplayClip);
+        AudioManager.Instance?.PlayOneShotSound(_aplayClip);
         _itemIndex--;
         if (_itemIndex < 0) _itemIndex = _weaponItems.Count - 1;
         UpdateGraphics();
@@ -91,7 +100,7 @@ public class ChooseWaponUI : MonoBehaviour
 
     private void MoveRight()
     {
-        AudioManager.Instance.PlayOneShotSound(_aplayClip);
+        AudioManager.Instance?.PlayOneShotSound(_aplayClip);
         _itemIndex++;
         if (_itemIndex >= _weaponItems.Count) _itemIndex = 0;
         UpdateGraphics();
@@ -104,13 +113,20 @@ public class ChooseWaponUI : MonoBehaviour
         {
             _curWeaponImage.sprite = _weaponItems[_itemIndex].Sprite;
         }
-        if (_appData.IsWeaponUnlocked(_curWeapon.Name))
+        if (_checkButton != null)
         {
-            _checkButton.GetComponentInChildren<TextMeshProUGUI>().text = "SELECT";
-        }
-        else
-        {
-            _checkButton.GetComponentInChildren<TextMeshProUGUI>().text = _weaponItems[_itemIndex].Price.ToString();
+            var textMesh = _checkButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (textMesh != null)
+            {
+                if (_appData.IsWeaponUnlocked(_curWeapon.Name))
+                {
+                    textMesh.text = "SELECT";
+                }
+                else
+                {
+                    textMesh.text = _weaponItems[_itemIndex].Price.ToString();
+                }
+            }
         }
     }
 }

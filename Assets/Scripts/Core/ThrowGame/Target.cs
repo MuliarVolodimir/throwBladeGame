@@ -11,7 +11,7 @@ public class Target : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (!FindAnyObjectByType<DragAndThrow>().EndGame)
+        if (!FindAnyObjectByType<DragAndThrow>().EndGame && !FindAnyObjectByType<DragAndThrow>().PauseGame)
         {
             AudioManager.Instance.PlayOneShotSound(_destroyTargetClip);
             GameObject particle = Instantiate(_particleSystem.gameObject, transform.position, transform.rotation);

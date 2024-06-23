@@ -29,6 +29,7 @@ public class DragAndThrow : MonoBehaviour
     private bool _isDragging = false;
     private bool _canDragging = false;
     public bool EndGame = true;
+    public bool PauseGame = true;
 
     private ApplicationData _appData;
     private Sprite _currSelectedWeapon;
@@ -54,6 +55,7 @@ public class DragAndThrow : MonoBehaviour
         SpawnObject();
         _attemptsText.text = $"Attempts: {_attemptsCount}";
         EndGame = false;
+        PauseGame = false;
     }
 
     private void _loadingScreen_OnLoad()
@@ -91,7 +93,7 @@ public class DragAndThrow : MonoBehaviour
 
     void Update()
     {
-        if (!EndGame)
+        if (!EndGame && !PauseGame)
         {
             if (Input.GetMouseButtonDown(0) && _canDragging)
             {

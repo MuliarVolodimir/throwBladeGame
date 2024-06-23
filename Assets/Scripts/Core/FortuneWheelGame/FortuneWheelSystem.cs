@@ -20,6 +20,8 @@ public class FortuneWheelSystem : MonoBehaviour
     [SerializeField] AudioClip _wheelClip;
     [SerializeField] AudioClip _prizeClip;
 
+    [SerializeField] Button _closeButton;
+
     private float[] _prizeAngles;
     private float _targetAngle;
     private bool _isSpinning = false;
@@ -44,15 +46,16 @@ public class FortuneWheelSystem : MonoBehaviour
         AudioManager.Instance.PlayOneShotSound(_applyClip);
         if (!_isSpinning)
         {
+            _closeButton.interactable = false;
             var tickets = ApplicationData.Instance.GetTickets();
             if (tickets >= _spinPrice)
             {
                 ApplicationData.Instance.AddResourceTickets(-_spinPrice);
                 _isSpinning = true;
 
-                // Вибір випадкового призу і встановлення цільового кута так, щоб приз був внизу
+                
                 int prizeIndex = UnityEngine.Random.Range(0, _items.Count);
-                _targetAngle = 360 * 5 - _prizeAngles[prizeIndex]; // 360 * 5 для кількох обертів, мінус кут призу
+                _targetAngle = 360 * 5 - _prizeAngles[prizeIndex];
                 StartCoroutine(SpinCoroutine(_targetAngle, prizeIndex));
             }
             else
@@ -83,6 +86,7 @@ public class FortuneWheelSystem : MonoBehaviour
         _isSpinning = false;
 
         CheckPrize(prizeIndex);
+        _closeButton.interactable = true;
     }
 
     private void CheckPrize(int prizeIndex)
@@ -101,6 +105,7 @@ public class FortuneWheelSystem : MonoBehaviour
             default:
                 break;
         }
+        
     }
 }
 

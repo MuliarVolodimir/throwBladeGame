@@ -35,8 +35,9 @@ public class ThrowGameUI : MonoBehaviour
     { 
         _game.EndGame = true;
         AudioManager.Instance.PlayOneShotSound(_applyClip);
-        var a = FindAnyObjectByType<ScoreSystem>().CalculateReward();
-        _rewardText.text = $"+{a}";
+        var crystals = FindAnyObjectByType<ScoreSystem>().CalculateReward();
+        _rewardText.text = $"+{crystals}";
+        ApplicationData.Instance.AddResourceCrystals(crystals);
         _rewardScreen.SetActive(true);
     }
 
@@ -64,5 +65,13 @@ public class ThrowGameUI : MonoBehaviour
     {
         AudioManager.Instance.PlayOneShotSound(_applyClip);
         _postGame.SetActive(!_postGame.activeSelf);
+        if (_postGame.activeSelf == true)
+        {
+            _game.PauseGame = true;
+        }
+        else
+        {
+            _game.PauseGame = false;
+        }
     }
 }
