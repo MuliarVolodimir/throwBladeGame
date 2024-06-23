@@ -5,12 +5,12 @@ public class ShopItem : MonoBehaviour
     [SerializeField] int _price;
     [SerializeField] int _reward;
     [SerializeField] ResourceType _resourceType;
+    [SerializeField] PopupScreen _popupScreen;
 
     private ApplicationData _appData;
-    private PopupScreen _popupScreen;
+
     private void Start()
     {
-        _popupScreen = FindAnyObjectByType<PopupScreen>();
         _appData = ApplicationData.Instance;
     }
 

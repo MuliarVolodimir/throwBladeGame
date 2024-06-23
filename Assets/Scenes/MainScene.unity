@@ -971,7 +971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4873577261272394646, guid: 24c1a0a6415f8e9459ff45a245fea92b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4873577261272394646, guid: 24c1a0a6415f8e9459ff45a245fea92b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2092,6 +2092,7 @@ MonoBehaviour:
   _price: 10
   _reward: 1
   _resourceType: 1
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!1 &502382891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,7 +2276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572175972038979301, guid: c7b27a7a2a6add5479d37f4c4c927f54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7572175972038979301, guid: c7b27a7a2a6add5479d37f4c4c927f54, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3551,8 +3552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 0
-  _reward: 10
+  _reward: 250
   _resourceType: 0
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &661758522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5643,6 +5645,7 @@ MonoBehaviour:
   _price: 1000
   _reward: 100
   _resourceType: 1
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &1004869547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7221,6 +7224,7 @@ MonoBehaviour:
   _price: 50
   _reward: 5
   _resourceType: 1
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &1427899911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9486,6 +9490,7 @@ MonoBehaviour:
   _price: 100
   _reward: 10
   _resourceType: 1
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &1782591169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9767,8 +9772,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 0
-  _reward: 10
+  _reward: 100
   _resourceType: 0
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &1832578372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9916,8 +9922,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 0
-  _reward: 10
+  _reward: 500
   _resourceType: 0
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &1837322822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10760,8 +10767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 0
-  _reward: 10
+  _reward: 1000
   _resourceType: 0
+  _popupScreen: {fileID: 2516624755342443335}
 --- !u!114 &2020297120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11985,7 +11993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6640714062751399474, guid: bd6e7c7cb109a35499c75cf3ae309ec5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6640714062751399474, guid: bd6e7c7cb109a35499c75cf3ae309ec5, type: 3}
       propertyPath: m_StaticEditorFlags
