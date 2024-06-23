@@ -7,9 +7,10 @@ public class ShopItem : MonoBehaviour
     [SerializeField] ResourceType _resourceType;
 
     private ApplicationData _appData;
-
+    private PopupScreen _popupScreen;
     private void Start()
     {
+        _popupScreen = FindAnyObjectByType<PopupScreen>();
         _appData = ApplicationData.Instance;
     }
 
@@ -46,6 +47,10 @@ public class ShopItem : MonoBehaviour
         {
             _appData.AddResourceCrystals(-_price);
             _appData.AddResourceTickets(_reward);
+        }
+        else
+        {
+            _popupScreen.ShowMessage("NOT ENOUGHT CRYSTALS");
         }
     }
 }
