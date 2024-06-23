@@ -1156,7 +1156,7 @@ MonoBehaviour:
   _applyClip: {fileID: 8300000, guid: 32cd43ca549c6bf48a1eadca2935249b, type: 3}
   _wheelClip: {fileID: 8300000, guid: 8587d5644be4c574b8c13c06c9d72e46, type: 3}
   _prizeClip: {fileID: 8300000, guid: c0d274d0ef5f536488bbb9440d7b9892, type: 3}
-  _closeButton: {fileID: 0}
+  _closeButton: {fileID: 912781217}
 --- !u!1 &267116178
 GameObject:
   m_ObjectHideFlags: 0

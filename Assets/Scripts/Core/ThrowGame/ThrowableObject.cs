@@ -35,7 +35,7 @@ public class ThrowableObject : MonoBehaviour
             if (hit.collider != null)
             {
                 Destroy(gameObject);
-                Destroy(hit.collider.gameObject);
+                hit.collider.GetComponent<Target>().Die();
                 
                 return;
             }

@@ -9,7 +9,7 @@ public class Target : MonoBehaviour
 
     public event Action OnDie;
 
-    private void OnDestroy()
+    internal void Die()
     {
         if (!FindAnyObjectByType<DragAndThrow>().EndGame && !FindAnyObjectByType<DragAndThrow>().PauseGame)
         {
@@ -19,5 +19,6 @@ public class Target : MonoBehaviour
             FindAnyObjectByType<ScoreSystem>().AddScore(_reward);
             OnDie?.Invoke();
         }
+        Destroy(gameObject);
     }
 }
