@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class DragAndThrow : MonoBehaviour
 {
     [SerializeField] float _maxSpeed;
-    [SerializeField] GameObject _targetPrefab;
-    [SerializeField] List<Transform> _targetsSpawnPos;
     [SerializeField] Transform _spawnPos;
     [SerializeField] ThrowableObject _throwableObject;
     [SerializeField] LineRenderer _lineRenderer;
     [SerializeField] float _maxDragDistance = 3.0f;
-    [SerializeField] int _targetsCount = 5;
 
     [SerializeField] LoadingScreen _loadingScreen;
     [SerializeField] TextMeshProUGUI _attemptsText;
@@ -20,80 +15,61 @@ public class DragAndThrow : MonoBehaviour
     [SerializeField] AudioClip _throwClip;
 
     private ThrowableObject _currObject;
-    private int _targetsLeft;
-    private int _attemptsCount;
-
     private Vector2 _startTouchPosition;
     private Vector2 _currentTouchPosition;
 
     private bool _isDragging = false;
     private bool _canDragging = false;
-    public bool EndGame = true;
-    public bool PauseGame = true;
 
     private ApplicationData _appData;
     private Sprite _currSelectedWeapon;
 
-    public event Action OnGameEnd;
-
-    private List<GameObject> _currTargets = new List<GameObject>();
+    private DragAndThrowGameSystem _gameSystem;
 
     private void Start()
     {
+        _gameSystem = GetComponent<DragAndThrowGameSystem>();
+
         _appData = ApplicationData.Instance;
 
         var weapon = _appData.GetWeapons().Find(w => w.Name == _appData.GetWeapon());
         _currSelectedWeapon = weapon.Sprite;
         Debug.Log(weapon.Name);
 
-        _loadingScreen.OnLoad += _loadingScreen_OnLoad;
+        _loadingScreen.OnLoad += LoadingScreen_OnLoad;
+
+        _gameSystem.OnAttemptsCountChanged += UpdateAttemptsText;
+        _gameSystem.OnTargetsLeftChanged += CheckGameStatus;
+        _gameSystem.OnGameEnd += GameEnd;
     }
 
-    public void StartGame()
-    {
-        SpawnTargets();
-        SpawnObject();
-        _attemptsText.text = $"Attempts: {_attemptsCount}";
-        EndGame = false;
-        PauseGame = false;
-    }
-
-    private void _loadingScreen_OnLoad()
+    private void LoadingScreen_OnLoad()
     {
         StartGame();
     }
 
-    private void SpawnTargets()
+    public void StartGame()
     {
-        var targets = new List<Transform>(_targetsSpawnPos);
-        _targetsLeft = UnityEngine.Random.Range(1, _targetsCount);
-        _attemptsCount = _targetsLeft;
-
-        for (int i = 0; i < _targetsLeft; i++)
-        {
-            var index = UnityEngine.Random.Range(0, targets.Count);
-            var target = Instantiate(_targetPrefab, targets[index].position, Quaternion.identity);
-            _currTargets.Add(target);
-            target.GetComponent<Target>().OnDie += _target_OnDie;
-            targets.RemoveAt(index);
-        }
+        _gameSystem.StartGame();
+        SpawnObject();
     }
 
-    private void _target_OnDie()
+    private void UpdateAttemptsText(int attemptsCount)
     {
-        if (!EndGame)
+        _attemptsText.text = $"Attempts: {attemptsCount}";
+    }
+
+    private void CheckGameStatus(int targetsLeft)
+    {
+        if (targetsLeft <= 0)
         {
-            _targetsLeft--;
-            if (_targetsLeft <= 0 || _attemptsCount <= 0)
-            {
-                GameEnd();
-            }
+            _gameSystem.ObjectDied();
         }
     }
 
     void Update()
     {
-        if (!EndGame && !PauseGame)
+        if (!_gameSystem.EndGame)
         {
             if (Input.GetMouseButtonDown(0) && _canDragging)
             {
@@ -145,21 +121,12 @@ public class DragAndThrow : MonoBehaviour
         }
     }
 
-    private void _currObject_OnDie()
+    private void CurrObject_OnDie()
     {
-        if (!EndGame)
+        _gameSystem.ObjectDied();
+        if (!_gameSystem.EndGame)
         {
-            _attemptsCount--;
-            _attemptsText.text = $"Attempts: {_attemptsCount}";
-
-            if (_attemptsCount <= 0 || _targetsLeft <= 0)
-            {
-                GameEnd();
-            }
-            else
-            {
-                SpawnObject();
-            }
+            SpawnObject();
         }
     }
 
@@ -172,25 +139,12 @@ public class DragAndThrow : MonoBehaviour
 
         _currObject = Instantiate(_throwableObject, _spawnPos.position, _spawnPos.rotation);
         _currObject.GetComponentInChildren<SpriteRenderer>().sprite = _currSelectedWeapon;
-        _currObject.OnDie += _currObject_OnDie;
+        _currObject.OnDie += CurrObject_OnDie;
         _canDragging = true;
     }
 
     private void GameEnd()
     {
-        EndGame = true;
-        OnGameEnd?.Invoke();
-
-        foreach (var target in _currTargets)
-        {
-            Destroy(target);
-            if (target != null)
-            {
-                target.gameObject.GetComponent<Target>().OnDie -= _target_OnDie;
-            }
-        }
-        _currTargets.Clear();
-
         if (_currObject != null)
         {
             Destroy(_currObject.gameObject);

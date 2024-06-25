@@ -16,14 +16,11 @@ public class ThrowableObject : MonoBehaviour
 
     public event Action OnDie;
 
-    private void Start()
-    {
-        
-    }
     private void OnDestroy()
     {
         OnDie?.Invoke();   
     }
+
     void Update()
     {
         if (_isMoving)
@@ -35,8 +32,7 @@ public class ThrowableObject : MonoBehaviour
             if (hit.collider != null)
             {
                 Destroy(gameObject);
-                hit.collider.GetComponent<Target>().Die();
-                
+                hit.collider.GetComponent<Target>().TakeDamage(); 
                 return;
             }
 
@@ -66,7 +62,6 @@ public class ThrowableObject : MonoBehaviour
 
         RotateTowardsDirection(_direction);
     }
-
 
     public void Aim(Vector2 direction)
     {
