@@ -131,7 +131,7 @@ public class ApplicationData
         {
             _resources[RESOURCE_CRYSTAL_ID].Count = PlayerPrefs.GetInt("Crystals");
         }
-        if (PlayerPrefs.HasKey("Tiskets"))
+        if (PlayerPrefs.HasKey("Tickets"))
         {
             _resources[RESOURCE_TICKET_ID].Count = PlayerPrefs.GetInt("Tickets");
         }

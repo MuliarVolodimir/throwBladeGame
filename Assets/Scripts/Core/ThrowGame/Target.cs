@@ -12,6 +12,10 @@ public class Target : MonoBehaviour
 
     public void TakeDamage()
     {
+        AudioManager.Instance.PlayOneShotSound(_destroyTargetClip);
+        GameObject particle = Instantiate(_particleSystem.gameObject, transform.position, transform.rotation);
+        Destroy(particle, 0.5f);
+
         if (!FindAnyObjectByType<DragAndThrowGameSystem>().EndGame)
         {
             _health--;
@@ -30,9 +34,6 @@ public class Target : MonoBehaviour
 
     private void Die()
     {
-        AudioManager.Instance.PlayOneShotSound(_destroyTargetClip);
-        GameObject particle = Instantiate(_particleSystem.gameObject, transform.position, transform.rotation);
-        Destroy(particle, 0.5f);
         FindAnyObjectByType<ScoreSystem>().AddScore(_reward);
         OnDie?.Invoke();
         Destroy(gameObject);

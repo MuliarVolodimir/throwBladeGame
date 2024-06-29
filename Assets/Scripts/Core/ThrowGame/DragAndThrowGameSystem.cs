@@ -22,6 +22,7 @@ public class DragAndThrowGameSystem : MonoBehaviour
     public event Action<int> OnAttemptsCountChanged;
     public event Action<int> OnTargetsLeftChanged;
     public event Action<int> OnSuccessfulWavesChanged;
+    public event Action OnBossSpawned;
 
     public bool EndGame = true;
     public bool IsSuccessfulEnd;
@@ -128,10 +129,11 @@ public class DragAndThrowGameSystem : MonoBehaviour
     private void SpawnBoss()
     {
         ClearCurrentTargets();
-        var boss = Instantiate(_bossPrefab, _bossSpawnPos.position, Quaternion.identity);
+        var boss = Instantiate(_bossPrefab, _bossSpawnPos);
         var target = boss.GetComponent<Target>();
         target.OnDie += Target_OnDie;
 
+        OnBossSpawned?.Invoke();
         _currTargets.Add(boss);
         _isBossWave = true;
         _attemptsCount = target.GetHealth() + 2;
