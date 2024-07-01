@@ -108,8 +108,8 @@ public class DragAndThrowGameSystem : MonoBehaviour
 
     private IEnumerator BossDieCoroutine()
     {
-        yield return new WaitForSeconds(1f);
         GameEnd(true);
+        yield return new WaitForSeconds(1f);
     }
 
     public void ObjectDied()

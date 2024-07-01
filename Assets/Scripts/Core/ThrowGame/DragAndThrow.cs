@@ -132,15 +132,22 @@ public class DragAndThrow : MonoBehaviour
 
     private void SpawnObject()
     {
-        if (_currObject != null)
+        if (!_gameSystem.EndGame)
         {
-            Destroy(_currObject.gameObject);
-        }
+            if (_currObject != null)
+            {
+                Destroy(_currObject.gameObject);
+            }
 
-        _currObject = Instantiate(_throwableObject, _spawnPos.position, _spawnPos.rotation);
-        _currObject.GetComponentInChildren<SpriteRenderer>().sprite = _currSelectedWeapon;
-        _currObject.OnDie += CurrObject_OnDie;
-        _canDragging = true;
+            _currObject = Instantiate(_throwableObject, _spawnPos.position, _spawnPos.rotation);
+            _currObject.GetComponentInChildren<SpriteRenderer>().sprite = _currSelectedWeapon;
+            _currObject.OnDie += CurrObject_OnDie;
+            _canDragging = true;
+        }
+        else
+        {
+            _canDragging = false;
+        }
     }
 
     private void GameEnd()
