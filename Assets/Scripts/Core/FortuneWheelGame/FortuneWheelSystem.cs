@@ -46,10 +46,10 @@ public class FortuneWheelSystem : MonoBehaviour
         AudioManager.Instance.PlayOneShotSound(_applyClip);
         if (!_isSpinning)
         {
-            _closeButton.interactable = false;
             var tickets = ApplicationData.Instance.GetTickets();
             if (tickets >= _spinPrice)
             {
+                _closeButton.interactable = false;
                 ApplicationData.Instance.AddResourceTickets(-_spinPrice);
                 _isSpinning = true;
 
@@ -61,6 +61,7 @@ public class FortuneWheelSystem : MonoBehaviour
             else
             {
                 _popupScreen.ShowMessage($"NOT ENOUGH TICKETS");
+                _closeButton.interactable = true;
             }
         }
     }
