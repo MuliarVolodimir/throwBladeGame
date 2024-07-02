@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5579871783455753116}
   - component: {fileID: 8361636925077007156}
   - component: {fileID: -2194709732083694207}
+  - component: {fileID: 1324642865327823671}
   m_Layer: 6
   m_Name: TargetImage
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5249998178136978854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.13, y: 3.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,3 +138,24 @@ MonoBehaviour:
   _reward: 5
   _destroyTargetClip: {fileID: 8300000, guid: 6be1a82b2de9d4048ac55cd6ed9b0981, type: 3}
   _particleSystem: {fileID: 1934902246278077450, guid: 824412f3682742741911a4afafef435f, type: 3}
+--- !u!95 &1324642865327823671
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249998178136978854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63181a27c5526d64b8962943fc3b1989, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

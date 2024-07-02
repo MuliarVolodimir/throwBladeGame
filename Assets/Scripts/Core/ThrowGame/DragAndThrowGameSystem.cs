@@ -74,12 +74,12 @@ public class DragAndThrowGameSystem : MonoBehaviour
         ClearCurrentTargets();
 
         var targets = new List<Transform>(_targetsSpawnPos);
-        _targetsLeft = UnityEngine.Random.Range(1, _targetsCount);
+        _targetsLeft = UnityEngine.Random.Range(2, _targetsCount);
 
         for (int i = 0; i < _targetsLeft; i++)
         {
             var index = UnityEngine.Random.Range(0, targets.Count);
-            var target = Instantiate(_targetPrefab, targets[index].position, Quaternion.identity);
+            var target = Instantiate(_targetPrefab, targets[index]);
             _currTargets.Add(target);
             target.GetComponent<Target>().OnDie += Target_OnDie;
             targets.RemoveAt(index);
