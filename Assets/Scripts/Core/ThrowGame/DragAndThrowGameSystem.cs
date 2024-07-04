@@ -7,7 +7,8 @@ public class DragAndThrowGameSystem : MonoBehaviour
 {
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _bossPrefab;
-    [SerializeField] private List<Transform> _targetsSpawnPos;
+    [SerializeField] private List<Transform> _hTargetsSpawnPos;
+    [SerializeField] private List<Transform> _vTargetsSpawnRot;
     [SerializeField] private Transform _bossSpawnPos;
     [SerializeField] private int _targetsCount = 5;
     [SerializeField] private int _wavesForBoss = 3;
@@ -73,7 +74,9 @@ public class DragAndThrowGameSystem : MonoBehaviour
     {
         ClearCurrentTargets();
 
-        var targets = new List<Transform>(_targetsSpawnPos);
+        var targets = new List<Transform>(_hTargetsSpawnPos);
+        if (UnityEngine.Random.Range(0, 2) == 1) targets = new List<Transform>(_vTargetsSpawnRot);
+
         _targetsLeft = UnityEngine.Random.Range(2, _targetsCount);
 
         for (int i = 0; i < _targetsLeft; i++)
