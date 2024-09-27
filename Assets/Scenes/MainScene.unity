@@ -1543,7 +1543,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1499.9326}
+  m_SizeDelta: {x: 0, y: 2496.5806}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &330443777
 MonoBehaviour:
@@ -3266,13 +3266,14 @@ GameObject:
   - component: {fileID: 661758523}
   - component: {fileID: 661758522}
   - component: {fileID: 661758521}
+  - component: {fileID: 661758525}
   m_Layer: 5
   m_Name: BuyButton (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &661758520
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3403,6 +3404,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661758519}
   m_CullTransparentMesh: 1
+--- !u!114 &661758525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661758519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &663637457
 GameObject:
   m_ObjectHideFlags: 0
@@ -9459,6 +9488,7 @@ GameObject:
   - component: {fileID: 1832578373}
   - component: {fileID: 1832578372}
   - component: {fileID: 1832578371}
+  - component: {fileID: 1832578376}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -9596,6 +9626,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832578369}
   m_CullTransparentMesh: 1
+--- !u!114 &1832578376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832578369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: com.neytralstudio.throwtheblades.buycrystals
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1832578371}
+        m_TargetAssemblyTypeName: ShopItem, Core
+        m_MethodName: OnPurchaseCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
+  priceText: {fileID: 0}
 --- !u!1 &1837322819
 GameObject:
   m_ObjectHideFlags: 0
@@ -9609,13 +9678,14 @@ GameObject:
   - component: {fileID: 1837322823}
   - component: {fileID: 1837322822}
   - component: {fileID: 1837322821}
+  - component: {fileID: 1837322825}
   m_Layer: 5
   m_Name: BuyButton (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1837322820
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9746,6 +9816,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837322819}
   m_CullTransparentMesh: 1
+--- !u!114 &1837322825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837322819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &1904423622
 GameObject:
   m_ObjectHideFlags: 0
@@ -10454,13 +10552,14 @@ GameObject:
   - component: {fileID: 2020297121}
   - component: {fileID: 2020297120}
   - component: {fileID: 2020297119}
+  - component: {fileID: 2020297123}
   m_Layer: 5
   m_Name: BuyButton (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2020297118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10591,6 +10690,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020297117}
   m_CullTransparentMesh: 1
+--- !u!114 &2020297123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020297117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 0}
 --- !u!1 &2024710217
 GameObject:
   m_ObjectHideFlags: 0
@@ -11868,6 +11995,10 @@ PrefabInstance:
     - target: {fileID: 8045381431954300470, guid: d72e4de10f31b9a4384dbd570af12310, type: 3}
       propertyPath: m_Name
       value: SETTINGS_SCREEN
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045381431954300470, guid: d72e4de10f31b9a4384dbd570af12310, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8414267074423784892, guid: d72e4de10f31b9a4384dbd570af12310, type: 3}
       propertyPath: m_Pivot.x
