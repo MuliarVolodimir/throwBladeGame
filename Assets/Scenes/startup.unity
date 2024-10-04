@@ -276,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1090902379}
   - component: {fileID: 1090902380}
+  - component: {fileID: 1090902381}
   m_Layer: 0
   m_Name: AppStart
   m_TagString: Untagged
@@ -324,6 +325,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16123bb81a767fc4eb884af478a67959, type: 2}
   - {fileID: 11400000, guid: da2b210a447b24f4b8333f85c5451b53, type: 2}
   - {fileID: 11400000, guid: 3871e546ee4236840acecb9c1ce25019, type: 2}
+--- !u!114 &1090902381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090902378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a692e3fb579eefb459f0c4af22ec8cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5704791
+  _iOSGameId: 5704790
+  _testMode: 1
 --- !u!1 &1991299852
 GameObject:
   m_ObjectHideFlags: 0

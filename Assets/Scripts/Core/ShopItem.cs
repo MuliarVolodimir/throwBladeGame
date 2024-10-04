@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Purchasing;
 
 public class ShopItem : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class ShopItem : MonoBehaviour
         switch (_resourceType)
         {
             case ResourceType.Crystal:
-                BuyCrystals();
+                //BuyCrystals();
                 break;
             case ResourceType.Ticket:
                 BuyTickets();
@@ -35,10 +36,20 @@ public class ShopItem : MonoBehaviour
         }
     }
 
+    public void OnPurchaseCompleted(Product product)
+    {
+        switch (product.definition.id)
+        {
+            case "com.neytralstudio.throwtheblades.buycrystals":
+                BuyCrystals();
+                break;
+        }
+    }
+
     private void BuyCrystals()
     {
-        // purchase system logic
         _appData.AddResourceCrystals(_reward);
+        Debug.Log($"buy {_reward} crystals");
     }
 
     private void BuyTickets()
